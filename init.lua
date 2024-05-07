@@ -37,3 +37,9 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+--custom changes
+vim.cmd("source " .. vim.fn.stdpath("config") .. "/commands.vim")
+vim.cmd("source " .. vim.fn.stdpath("config") .. "/settings.vim")
+dofile(vim.fn.stdpath("config") .. "/lua/custom/init.lua")
+dofile(vim.fn.stdpath("config") .. "/lua/custom/projects/init.lua")
