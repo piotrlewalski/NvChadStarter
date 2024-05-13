@@ -26,7 +26,7 @@ M.ui = {
 			bg = "grey",
 		},
     TbTabOn = {
-			bg = "grey",
+			bg = "#ffffff",
     },
     TbTabOff = {
 			bg = "grey",
