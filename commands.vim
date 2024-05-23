@@ -23,7 +23,7 @@ command! Btoggle Barbecue toggle
 command! GitRestore !git restore %
 command! GitBlame lua require"gitsigns".toggle_current_line_blame()
 command! GitDiff lua require"gitsigns".diffthis()
-command! GitStatus lua require"custom.utils".GitStatus()
+command! -nargs=? -complete=file GitStatus lua require"custom.utils".GitStatus(<f-args>)
 command! GitAdd silent !git add %
 command! -nargs=1 GitCommit :!git commit -m <args>
 command! GitCommitLog Telescope git_commits

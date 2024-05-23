@@ -3,7 +3,7 @@ local utils = require("custom.utils")
 local buffer_picker = require("custom.buffer_picker").buffer_picker
 
 local function map(mode, mapping, action, desc)
-  vim.keymap.set(mode, mapping, action, { desc = desc })
+  vim.keymap.set(mode, mapping, action, { desc = desc, noremap=true })
 end
 
 local function foldLevelSetter(level)
@@ -13,12 +13,6 @@ local function foldLevelSetter(level)
 end
 
 --FIXME
---[",,a"] = { ":LspUI code_action<CR>" , "Code action", },
---[",,s"] = {
---	utils.SwitchToFileWindow,
---	"Switch to source file window",
---},
---map('a', 'n', ':lua vim.lsp.buf.code_action()<CR>', 'code actions')
 --map("n", "[d", ":LspUI diagnostic prev<CR>", { desc = "Diagnostics prev" })
 --map("n", "]d", ":LspUI diagnostic next<CR>", { desc = "Diagnostics next" })
 map("n", ",,b", buffer_picker, "Tree focus")
@@ -34,11 +28,13 @@ map("n", ",,o", utils.SwitchToFileWindow, "Open file")
 map("n", ",,m", ":LspUI hover<CR>", "Hover message")
 map("n", "gr", ":Telescope lsp_references<CR>", "References")
 map("n", "gd", ":Telescope lsp_definitions<CR>", "Definitions")
+--map("n", "gd", ":FzfLua lsp_definitions<CR>", "Definitions")
+--map("n", "gr", ":FzfLua lsp_references<CR>", "References")
 map("n", ",,w", "<C-W>w", "Next window")
 map("n", ",,W", "<C-W>W", "Next window")
 map("n", ",,i", ":Telescope lsp_incoming_calls<CR>", "Calls to the function")
 map("n", ",,r", ":LspUI rename<CR>", "Rename")
-map("n", ",,a", ":CodeActionMenu<CR>", "Code action")
+map("n", ",,a", ":FzfLua lsp_code_actions<CR>", "Code action")
 map("n", ",,e", utils.SwitchToFileTree, "Tree focus")
 map("n", ",,s", utils.SwitchToOutline, "Outline focus")
 map("n", ",,h", ":NvCheatsheet<CR>", "Key Mappings")
@@ -46,7 +42,7 @@ map("n", ",,q", function() require("nvchad.tabufline").close_buffer() end, "Clos
 map("n", "=", function() vim.lsp.buf.format({ async = false }) end, "LSP formatting")
 map("n", ",,t", utils.SwitchToTerminalWindow, "Open term if needed and switch to it")
 map("n", ",,T", function() require("nvterm.terminal").send("!!") end, "Repeat last terminal command")
-map("n", ",,gc", function() require("treesitter-context").go_to_context() end, "Go to context")
+map("n", ",,gc", function() require("treesitter-context").go_to_context() end, "Go to context") --TODO
 map("n", ",,0", foldLevelSetter(9999), "Expand all")
 map("n", ",,1", foldLevelSetter(0), "Collapse all")
 map("n", ",,2", foldLevelSetter(1), "Set fold level")

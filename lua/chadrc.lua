@@ -19,6 +19,9 @@ M.ui = {
 			fg = "#ffffff",
 			bg = "red",
 		},
+    FzfLuaCursorLine = {
+      bg = "#333333",
+    },
 	},
 	hl_override = {
 		DiffText = {

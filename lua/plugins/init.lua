@@ -33,15 +33,18 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css",
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
       },
     },
   },
   --{
   "NvChad/nvterm",
   init = function()
-    require("core.utils").load_mappings("nvterm")
+    require("core.utils").load_mappings "nvterm"
   end,
   config = function(_, opts)
     opts = {
@@ -69,8 +72,8 @@ return {
         auto_insert = false,
       },
     }
-    require("nvterm.termutil")
-    require("base46.term")
+    require "nvterm.termutil"
+    require "base46.term"
     require("nvterm").setup(opts)
   end,
   --},
@@ -102,7 +105,7 @@ return {
   --	},
   --},
   { "creativenull/efmls-configs-nvim", dependencies = { "neovim/nvim-lspconfig" }, lazy = false },
-  { "folke/trouble.nvim",              lazy = false },
+  { "folke/trouble.nvim", lazy = false },
 
   --Copilot
   {
@@ -201,7 +204,7 @@ return {
     event = { "CursorHold", "CursorHoldI" },
     dependencies = "nvim-treesitter",
     config = function()
-      require("illuminate").configure({
+      require("illuminate").configure {
         under_cursor = true,
         max_file_lines = nil,
         delay = 100,
@@ -226,7 +229,7 @@ return {
           "DressingSelect",
           "aerial",
         },
-      })
+      }
     end,
   },
   --{ --probably not required because barbecue plays a similar role
@@ -266,7 +269,7 @@ return {
     "hiphish/rainbow-delimiters.nvim",
     event = "BufReadPost",
     config = function()
-      local rainbow_delimiters = require("rainbow-delimiters")
+      local rainbow_delimiters = require "rainbow-delimiters"
 
       vim.g.rainbow_delimiters = {
         strategy = {
@@ -307,30 +310,30 @@ return {
       },
       pos_keybind = {
         main = {
-          back = "<leader>l",           -- back to secondary view
+          back = "<leader>l", -- back to secondary view
           hide_secondary = "<leader>h", -- hide secondary view
         },
         secondary = {
-          jump = "<CR>",           -- jump to code location
-          quit = "<Esc>",          -- close main and secondary veiw
+          jump = "<CR>", -- jump to code location
+          quit = "<Esc>", -- close main and secondary veiw
           hide_main = "<leader>h", -- hide main view
-          enter = "<leader>l",     -- enter into main view
+          enter = "<leader>l", -- enter into main view
         },
       },
     },
   },
-  {
-    "weilbith/nvim-code-action-menu",
-    cmd = "CodeActionMenu",
-    init = function()
-      vim.g.code_action_menu_show_details = true
-      vim.g.code_action_menu_show_diff = true
-      vim.g.code_action_menu_show_action_kind = true
-    end,
-    config = function()
-      dofile(vim.g.base46_cache .. "git")
-    end,
-  },
+  --{
+  --  "weilbith/nvim-code-action-menu",
+  --  cmd = "CodeActionMenu",
+  --  init = function()
+  --    vim.g.code_action_menu_show_details = true
+  --    vim.g.code_action_menu_show_diff = true
+  --    vim.g.code_action_menu_show_action_kind = true
+  --  end,
+  --  config = function()
+  --    dofile(vim.g.base46_cache .. "git")
+  --  end,
+  --},
   { -- Breadcrumbs
     "utilyre/barbecue.nvim",
     event = "LspAttach",
@@ -352,11 +355,11 @@ return {
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-        vim.cmd([[
+        vim.cmd [[
           if exists(":GitSigns")
             delcommand GitSigns
           endif
-        ]])
+        ]]
 
         local function map(mode, l, r, opts)
           opts = opts or {}
@@ -410,10 +413,18 @@ return {
   {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
-      require("telescope").load_extension("frecency")
+      require("telescope").load_extension "frecency"
     end,
     dependencies = { "kkharji/sqlite.lua" },
     lazy = false,
+  },
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("fzf-lua").setup {}
+    end,
+    lazy = false, --otherwise commands don't work before the plugin is loaded
   },
   --{causes issues with tabs
   --	"sunjon/shade.nvim",

@@ -215,7 +215,7 @@ M.BufLeave = function()
   end
 end
 
-M.GitStatus = function()
+M.GitStatus = function(path)
   local actions = require("telescope.actions")
   local conf = require("telescope.config").values
   local gitsigns = require("gitsigns")
@@ -238,6 +238,7 @@ M.GitStatus = function()
 
   require("telescope.builtin").git_status({
     sorter = custom_sorter(),
+    cwd=path,
     attach_mappings = function(_, map)
       --run diff view after choosing an option
       map("i", "<CR>", function(prompt_bufnr)
