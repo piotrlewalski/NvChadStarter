@@ -85,9 +85,9 @@ M.ui = {
     enabled = true,
     lazyload = false,
     --order = { "treeOffset", "custom_buffers", "custom_tabs" },
-    order = { "treeOffset", "custom_buffers", "custom_tabs" },
+    order = { "custom_treeOffset", "custom_buffers", "custom_tabs" },
     --modules = nil
-    modules = {custom_buffers = tabufline_modules.buffers, custom_tabs = tabufline_modules.tabs},
+    modules = {custom_treeOffset = tabufline_modules.treeOffset, custom_buffers = tabufline_modules.buffers, custom_tabs = tabufline_modules.tabs},
   },
 
   lsp = { signature = true },
