@@ -32,7 +32,7 @@ command! GitBufferCommitLog Telescope git_bcommits
 command! GitBranches Telescope git_branches
 command! GitStashList Telescope git_stash
 
-"command! Terminal execute 'lua require"nvterm.terminal".new { pos = "sp", size = 0.3 }'
+command! -nargs=? Terminal lua require("custom.utils").CreateTerminal(<f-args>)
 
 "Query commands
 command! QLiveGrep Telescope live_grep

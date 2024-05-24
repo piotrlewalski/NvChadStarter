@@ -172,7 +172,7 @@ M.SwitchToFileTree = function()
   vim.cmd("NvimTreeFocus")
   vim.schedule(function()
     --switch to normal mode
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), 'n', true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
   end)
   --RepositionTerminal()
 end
@@ -238,7 +238,7 @@ M.GitStatus = function(path)
 
   require("telescope.builtin").git_status({
     sorter = custom_sorter(),
-    cwd=path,
+    cwd = path,
     attach_mappings = function(_, map)
       --run diff view after choosing an option
       map("i", "<CR>", function(prompt_bufnr)
@@ -308,10 +308,10 @@ M.StartAutoReload = function(callback)
     local stat = uv.fs_stat(file_path)
 
     if
-        not vim.api.nvim_buf_is_valid(buf)
-        or not vim.api.nvim_win_is_valid(win)
-        or file_path ~= vim.api.nvim_buf_get_name(buf)
-        or buf ~= vim.api.nvim_win_get_buf(win)
+      not vim.api.nvim_buf_is_valid(buf)
+      or not vim.api.nvim_win_is_valid(win)
+      or file_path ~= vim.api.nvim_buf_get_name(buf)
+      or buf ~= vim.api.nvim_win_get_buf(win)
     then
       timer:stop()
       pcall(timer.close, timer)
@@ -319,8 +319,8 @@ M.StartAutoReload = function(callback)
     end
 
     if
-        not last_stat
-        or last_stat and (last_stat.mtime.sec ~= stat.mtime.sec or last_stat.mtime.nsec ~= stat.mtime.nsec)
+      not last_stat
+      or last_stat and (last_stat.mtime.sec ~= stat.mtime.sec or last_stat.mtime.nsec ~= stat.mtime.nsec)
     then
       local line_count = vim.api.nvim_buf_line_count(buf)
       local cursor_at_the_end = vim.api.nvim_win_get_cursor(win)[1] == line_count
@@ -367,8 +367,8 @@ M.WatchFile = function(path, callback)
       return
     end
     if
-        not last_stat
-        or last_stat and (last_stat.mtime.sec ~= stat.mtime.sec or last_stat.mtime.nsec ~= stat.mtime.nsec)
+      not last_stat
+      or last_stat and (last_stat.mtime.sec ~= stat.mtime.sec or last_stat.mtime.nsec ~= stat.mtime.nsec)
     then
       local lines = vim.fn.readfile(path)
       callback(lines)
@@ -386,7 +386,6 @@ M.LiveGrepSkipGitSubmodules = function()
   require("telescope.builtin").live_grep({ glob_pattern = excluded_dirs })
 end
 
-
 M.PrepareTerminalTab = function()
   vim.cmd("tabnew")
   vim.cmd("Terminal")
@@ -396,10 +395,21 @@ end
 
 M.PrepareServerTab = function(command)
   vim.cmd("tabnew")
-  vim.cmd("Terminal "..command)
+  vim.cmd("Terminal " .. command)
 
   M.SwitchToFileWindow()
   vim.cmd("q")
+end
+
+M.CreateTerminal = function(cmd)
+  require("nvchad.term").new({ pos = "sp", size = 0.3 })
+  if cmd then
+    --this could be passed as an argument to nvchad.term.new
+    --the problem is that it would launch the terminal with this particular
+    --command as the main process and then quiting the process closes the term
+    vim.api.nvim_chan_send(vim.b.terminal_job_id, cmd .. "\n")
+  end
+  vim.cmd("wincmd J") --make sure that the window occupies the whole bottom
 end
 
 return M
