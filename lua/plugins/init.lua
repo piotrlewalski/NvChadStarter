@@ -105,7 +105,7 @@ return {
   --	},
   --},
   { "creativenull/efmls-configs-nvim", dependencies = { "neovim/nvim-lspconfig" }, lazy = false },
-  { "folke/trouble.nvim", lazy = false },
+  { "folke/trouble.nvim",              lazy = false },
 
   --Copilot
   {
@@ -131,6 +131,7 @@ return {
     opts = {
       sources = {
         { name = "nvim_lsp" },
+        { name = "html-css" },
         { name = "luasnip" },
         { name = "buffer" },
         { name = "nvim_lua" },
@@ -140,6 +141,17 @@ return {
     },
     event = { "InsertEnter" },
   },
+  --{
+  --  "Jezda1337/nvim-html-css",
+  --  dependencies = {
+  --    "nvim-treesitter/nvim-treesitter",
+  --    "nvim-lua/plenary.nvim",
+  --  },
+  --  config = function()
+  --    require("html-css"):setup()
+  --  end,
+  --  event = { "InsertEnter" },
+  --},
   {
     "nvim-telescope/telescope.nvim",
     --opts = { pickers = { git_files = true } },
@@ -310,14 +322,14 @@ return {
       },
       pos_keybind = {
         main = {
-          back = "<leader>l", -- back to secondary view
+          back = "<leader>l",           -- back to secondary view
           hide_secondary = "<leader>h", -- hide secondary view
         },
         secondary = {
-          jump = "<CR>", -- jump to code location
-          quit = "<Esc>", -- close main and secondary veiw
+          jump = "<CR>",           -- jump to code location
+          quit = "<Esc>",          -- close main and secondary veiw
           hide_main = "<leader>h", -- hide main view
-          enter = "<leader>l", -- enter into main view
+          enter = "<leader>l",     -- enter into main view
         },
       },
     },
@@ -426,6 +438,14 @@ return {
     end,
     lazy = false, --otherwise commands don't work before the plugin is loaded
   },
+  {
+    "aznhe21/actions-preview.nvim",
+    lazy = false,
+  },
+  --{
+  --  "L3MON4D3/LuaSnip",
+  --  enabled = false
+  --}
   --{causes issues with tabs
   --	"sunjon/shade.nvim",
   --	lazy = false,
