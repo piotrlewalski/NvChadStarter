@@ -46,7 +46,11 @@ M.ui = {
 		},
     Normal = {
       bg = "#0a0a0a",
-    }
+    },
+    TbBufOn = {
+      fg = "#ffffff",
+      --bg = "blue"
+    },
 	},
   --changed_themes = {},
   theme_toggle = { "onedark", "one_light" },

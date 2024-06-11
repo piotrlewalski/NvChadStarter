@@ -3,7 +3,7 @@ return {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     config = function()
-      require "configs.conform"
+      require("configs.conform")
     end,
   },
 
@@ -12,7 +12,7 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
+      require("configs.lspconfig")
     end,
   },
   {
@@ -38,13 +38,17 @@ return {
         "vimdoc",
         "html",
         "css",
+        "hcl",
+        "python",
+        "javascript",
+        "typescript",
       },
     },
   },
   --{
   "NvChad/nvterm",
   init = function()
-    require("core.utils").load_mappings "nvterm"
+    require("core.utils").load_mappings("nvterm")
   end,
   config = function(_, opts)
     opts = {
@@ -72,8 +76,8 @@ return {
         auto_insert = false,
       },
     }
-    require "nvterm.termutil"
-    require "base46.term"
+    require("nvterm.termutil")
+    require("base46.term")
     require("nvterm").setup(opts)
   end,
   --},
@@ -216,7 +220,7 @@ return {
     event = { "CursorHold", "CursorHoldI" },
     dependencies = "nvim-treesitter",
     config = function()
-      require("illuminate").configure {
+      require("illuminate").configure({
         under_cursor = true,
         max_file_lines = nil,
         delay = 100,
@@ -241,7 +245,7 @@ return {
           "DressingSelect",
           "aerial",
         },
-      }
+      })
     end,
   },
   --{ --probably not required because barbecue plays a similar role
@@ -281,7 +285,7 @@ return {
     "hiphish/rainbow-delimiters.nvim",
     event = "BufReadPost",
     config = function()
-      local rainbow_delimiters = require "rainbow-delimiters"
+      local rainbow_delimiters = require("rainbow-delimiters")
 
       vim.g.rainbow_delimiters = {
         strategy = {
@@ -367,11 +371,11 @@ return {
       },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
-        vim.cmd [[
+        vim.cmd([[
           if exists(":GitSigns")
             delcommand GitSigns
           endif
-        ]]
+        ]])
 
         local function map(mode, l, r, opts)
           opts = opts or {}
@@ -425,7 +429,7 @@ return {
   {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
-      require("telescope").load_extension "frecency"
+      require("telescope").load_extension("frecency")
     end,
     dependencies = { "kkharji/sqlite.lua" },
     lazy = false,
@@ -434,13 +438,40 @@ return {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("fzf-lua").setup {}
+      require("fzf-lua").setup({})
     end,
     lazy = false, --otherwise commands don't work before the plugin is loaded
   },
   {
     "aznhe21/actions-preview.nvim",
     lazy = false,
+  },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+    },
+    opts = {
+      debug = false,
+      -- See Configuration section for rest
+    },
+    lazy = false,
+    -- See Commands section for default commands if you want to lazy load on them
   },
   --{
   --  "L3MON4D3/LuaSnip",

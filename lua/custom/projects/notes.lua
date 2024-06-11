@@ -83,6 +83,7 @@ end
 PrepareUnitTestTab()
 PrepareBrowserTestTab()
 utils.PrepareServerTab("npm run server")
+--utils.PrepareServerTab("npm run hocuspocus")
 utils.PrepareServerTab("npm run websocket")
 utils.PrepareTerminalTab()
 
