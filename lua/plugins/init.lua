@@ -446,19 +446,25 @@ return {
     "aznhe21/actions-preview.nvim",
     lazy = false,
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("chatgpt").setup()
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  },
+  --{
+  --  "jackMort/ChatGPT.nvim",
+  --  event = "VeryLazy",
+  --  config = function()
+  --    require("chatgpt").setup(
+  --      {
+  --        api_key_cmd = "op read op://Dev/ChatGPT/credential --no-newline",
+  --        popup_input = {
+  --          submit = "<C-c>",
+  --        },
+  --      })
+  --  end,
+  --  dependencies = {
+  --    "MunifTanjim/nui.nvim",
+  --    "nvim-lua/plenary.nvim",
+  --    "folke/trouble.nvim",
+  --    "nvim-telescope/telescope.nvim",
+  --  },
+  --},
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
